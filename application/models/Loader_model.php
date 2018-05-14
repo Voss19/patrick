@@ -13,6 +13,9 @@ class Loader_model extends CI_Model {
 	{
 		parent::__construct();
 
+		// General
+		$this->data['title'] = 'Patrick Lykke Hansen Holm';
+
 		// JS
 		$this->data['scripts'][]['script'] = 'jquery-3.3.1.min.js';
 		$this->data['scripts'][]['script'] = 'popper.min.js';
