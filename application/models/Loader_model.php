@@ -5,7 +5,7 @@ class Loader_model extends CI_Model {
 
 	/*
 	Giver mulighed for at autoload data fra en constructor.
-	Fx javascript filer som bruges i hele controlleren.
+	Fx javascript filer som bruges i hele controlleren, men ikke i andre.
 	*/
 	var $data;
 
@@ -13,8 +13,19 @@ class Loader_model extends CI_Model {
 	{
 		parent::__construct();
 
+		// Init
+		$this->data['scripts'] = array();
+		$this->data['html_scripts'] = array();
+		$this->data['css'] = array();
+
 		// General
 		$this->data['title'] = 'Patrick Lykke Hansen Holm';
+		$this->data['nav_maps'] = $this->db->get('maps')->result_array();
+		$this->data['base_url'] = base_url();
+
+		foreach ($this->data['nav_maps'] as $key => $value) {
+			$this->data['nav_maps'][$key]['url'] = base_url('map/map/'.$value['m_id']);
+		}
 
 		// JS
 		$this->data['scripts'][]['script'] = 'jquery-3.3.1.min.js';
