@@ -5,4 +5,6 @@
 <?php echo realpath('./'); ?>
 <br>
 <?php echo APPPATH; ?>
+<br>
+<?php echo FCPATH; ?>
 <div id="map"></div>

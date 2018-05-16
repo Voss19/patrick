@@ -9,6 +9,9 @@ class Loader_model extends CI_Model {
 	*/
 	var $data;
 
+	var $admin;
+	var $user;
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -17,6 +20,7 @@ class Loader_model extends CI_Model {
 		$this->data['scripts'] = array();
 		$this->data['html_scripts'] = array();
 		$this->data['css'] = array();
+		$this->user = new StdClass;
 
 		// General
 		$this->data['title'] = 'Patrick Lykke Hansen Holm';
@@ -56,6 +60,11 @@ class Loader_model extends CI_Model {
 		// Url handling
 		addUrlArray($this->data['scripts'], 'script', base_url('assets/js/'));
 		addUrlArray($this->data['css'], 'style', base_url('assets/css/'));
+
+		// Adding user information to the data
+		if ($this->admin) {
+			$this->data['user'] = (array) $this->user;
+		}
 		
 		// View files
 		$this->parser->parse('head', $this->data);

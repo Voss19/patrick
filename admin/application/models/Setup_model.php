@@ -15,9 +15,22 @@ class Setup_model extends CI_Model {
 
 	private function logged_in()
 	{
-		if (!$this->session->admin) {
+		if (!$this->session->user) {
 			if ($this->router->fetch_class() != 'user' && $this->router->fetch_method() != 'login') {
-				#redirect();
+				#redirect('user/login');
+			}
+		} else {
+			$query =
+				$this->db->where('u_verification', $this->session->user['u_verification'])
+					->where('u_email', $this->session->user['u_email'])
+					->get('users');
+
+			if ($query->num_rows()) {
+				$this->loader->admin = true;
+				$this->loader->user = $query->row();
+			} else {
+				$this->session->unset_userdata('user');
+				#redirect('user/login');
 			}
 		}
 	}
