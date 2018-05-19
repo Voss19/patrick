@@ -8,8 +8,6 @@ class Loader_model extends CI_Model {
 	Fx javascript filer som bruges i hele controlleren, men ikke i andre.
 	*/
 	var $data;
-
-	var $admin;
 	var $user;
 
 	public function __construct()
@@ -20,7 +18,6 @@ class Loader_model extends CI_Model {
 		$this->data['scripts'] = array();
 		$this->data['html_scripts'] = array();
 		$this->data['css'] = array();
-		$this->user = new StdClass;
 
 		// General
 		$this->data['title'] = 'Patrick Lykke Hansen Holm';
@@ -62,7 +59,7 @@ class Loader_model extends CI_Model {
 		addUrlArray($this->data['css'], 'style', base_url('assets/css/'));
 
 		// Adding user information to the data
-		if ($this->admin) {
+		if ($this->user) {
 			$this->data['user'] = (array) $this->user;
 		}
 		
@@ -74,3 +71,31 @@ class Loader_model extends CI_Model {
 		$this->parser->parse('end', $this->data);
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
