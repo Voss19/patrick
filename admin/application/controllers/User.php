@@ -56,12 +56,35 @@ class User extends CI_Controller {
 		if (!$id) {
 			$id = $this->loader->user->u_id;
 		}
-		
+
 		if ($this->loader->user->u_level < 2) {
 			if ($id !== $this->loader->user->u_id) {
 				redirect('page/denied');
 			}
 		}
+
+		if ($this->input->post('update')) {
+			$this->fval->set_rules('opassword', 'Gammelt Kodeord', 'trim|required');
+			$this->fval->set_rules('npassword', 'Nyt Kodeord', 'trim|required');
+			$this->fval->set_rules('rpassword', 'Gentag Nyt Kodeord', 'trim|required|min_length[6]|matches[npassword]');
+
+			if ($this->fval->run()) {
+				$where = $this->db->where('u_id', $id);
+				if (password_verify($this->input->post('opassword'), $where->get('users')->row()->u_password)) {
+					$where->update('users', array(
+						'u_password'		=>		password_hash($this->input->post('npassword'), PASSWORD_DEFAULT),
+						'u_verification'	=>		md5(date('s i d m Y'))
+					));
+					$user = $where->get('users')->row();
+					$this->session->set_userdata('user', array(
+						'u_name'			=>		$user->u_name,
+						'u_email'			=>		$user->u_email,
+						'u_verification'	=>		$user->u_verification
+					));
+				}
+			}
+		}
+
 		$this->loader->view('admin/user/update');
 	}
 }

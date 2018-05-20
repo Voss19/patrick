@@ -21,12 +21,7 @@ class Loader_model extends CI_Model {
 
 		// General
 		$this->data['title'] = 'Patrick Lykke Hansen Holm';
-		$this->data['nav_maps'] = $this->db->get('maps')->result_array();
 		$this->data['base_url'] = base_url();
-
-		foreach ($this->data['nav_maps'] as $key => $value) {
-			$this->data['nav_maps'][$key]['url'] = base_url('map/map/'.$value['m_id']);
-		}
 
 		// JS
 		$this->data['scripts'][]['script'] = 'jquery-3.3.1.min.js';
@@ -54,9 +49,15 @@ class Loader_model extends CI_Model {
 			$view = 'not_found';
 		}
 
+		// Nav
+		$this->data['nav_maps'] = $this->db->get('maps')->result_array();
+
 		// Url handling
 		addUrlArray($this->data['scripts'], 'script', base_url('assets/js/'));
 		addUrlArray($this->data['css'], 'style', base_url('assets/css/'));
+		foreach ($this->data['nav_maps'] as $key => $value) {
+			$this->data['nav_maps'][$key]['url'] = base_url('map/map/'.$value['m_id']);
+		}
 
 		// Adding user information to the data
 		if ($this->user) {
