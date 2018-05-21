@@ -1,4 +1,4 @@
-<a href="{map_create}" class="btn btn-primary">Opret</a>
+<a href="{add}" class="btn btn-primary">Tilføj</a>
 <br><br>
 <table class="table">
   <thead>
@@ -19,7 +19,7 @@
       <td>{mi_active}</td>
       <td>
         <a href="{toggle}" class="btn btn-primary">Toggle</a>
-        <a href="" class="btn btn-danger">Slet</a>
+        <a href="{delete}" class="btn btn-danger">Slet</a>
       </td>
     </tr>
     {/inputs}

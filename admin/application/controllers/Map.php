@@ -14,7 +14,7 @@ class Map extends CI_Controller {
 
 			$this->loader->data['maps'][$key]['m_type'] = $type;
 			$this->loader->data['maps'][$key]['editurl'] = site_url('map/update/'.$value['m_id']);
-			$this->loader->data['maps'][$key]['addurl'] = site_url('map/add/'.$value['m_id']);
+			$this->loader->data['maps'][$key]['addurl'] = site_url('mapinput/list/'.$value['m_id']);
 			$this->loader->data['maps'][$key]['delurl'] = site_url('map/delete/'.$value['m_id']);
 		}
 

@@ -18,7 +18,7 @@
       <td>{m_desc}</td>
       <td>{m_type}</td>
       <td>
-        <a href="{addurl}" class="btn btn-primary">Tilføj</a>
+        <a href="{addurl}" class="btn btn-primary">Inputs</a>
         <a href="{editurl}" class="btn btn-success">Rediger</a>
         <a href="{delurl}" class="btn btn-danger">Slet</a>
       </td>
